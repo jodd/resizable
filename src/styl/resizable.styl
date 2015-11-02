@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+// Variables
+text-color = #59514f
+bg-color = #d1c6b8
+breakpoint = 'min-width: 40em' // 640px
+
+html
+    font-family Courier, Courier New, monospace
+    font-size 16px
+    line-height 1.5
+    color text-color
+    background-color rgb(234,234,234)
+
+body
+    margin 6em auto
+    padding 0 5%
+    max-width 600px
+
+header
+    position relative
+    margin 1em 0
+
+
+/* ==========================================================================
+   Resizable
+   ========================================================================== */
+
+/**
+ * 1. Ghost element technique to vertically center child element.
+ */
+
+.resizable
+    position relative
+    width 300px
+    height 300px
+    border 3px solid text-color
+    background-color bg-color
+    letter-spacing -.5em /* 1 */
+
+    &:after /* 1 */
+        content ''
+        display inline-block
+        height 100%
+        vertical-align middle
+
+    > * /* 1 */
+        display inline-block
+        vertical-align middle
+        letter-spacing normal
+
+    span
+        width 100%
+        text-align center
+
+        strong
+            display block
+            font-size 2rem
+
+    button
+        display block
+        position absolute
+        bottom .5rem
+        right .5rem
+        padding 0
+        background none
+        border-width 1rem
+        border-style solid
+        border-color transparent text-color text-color transparent
+
+        &:before
+            content ''
+            display block
+            position absolute
+            top -1.2rem
+            left -.7rem
+            width .9rem
+            height 1.8rem
+            background-color text-color
+            transform rotate(45deg)
+
+        span
+            visuallyhidden()
