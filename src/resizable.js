@@ -19,6 +19,7 @@ const defaults = {
 const namespace = 'resizable';
 const $W = $(window);
 const $D = $(document);
+const $B = $(document.body);
 
 // Alter the .on() jquery function to namespace events automatically.
 // TODO : Not sure if it's clean and/or safe, didnt find any resource about this technique. Need to dig into this.
@@ -26,13 +27,17 @@ const jqueryOn = $.fn.on;
 $.fn.on = function(events, ...args) {
     return jqueryOn.apply(this, [events.split(' ').join('.' + namespace + ' ') + '.' + namespace].concat(args));
 };
+const jqueryOne = $.fn.one;
+$.fn.one = function(events, ...args) {
+    return jqueryOne.apply(this, [events.split(' ').join('.' + namespace + ' ') + '.' + namespace].concat(args));
+};
 
 /* Public
    ========================================================================== */
 export class Resizable {
 
 /* constructor -------------------------------------------------------------- */
-constructor(element, options) {
+constructor(element, options = {}) {
 
     // Overwrite defaults with options.
     const opt = this.options = $.extend(true, {}, defaults, options);
@@ -40,14 +45,15 @@ constructor(element, options) {
     this.el = element;
     this.$el = $(this.el);
 
+    // Adjust CSS cursor property according to the given options.
+    this.cursor = opt.horizontal ? opt.vertical ? 'nwse-resize' : 'ew-resize' : 'ns-resize';
+
     // Create the element to use as the handle.
-    this.$handle = $('<button>', { 'class': 'resizable-handle' }).css('cursor', 'nwse-resize')
+    this.$handle = $('<button>', { 'class': 'resizable-handle' }).css('cursor', this.cursor)
         .append($('<span>', { 'class': 'resizable-text' }).text(opt.text))
         .appendTo(this.el);
 
-    // Adjust CSS cursor property according to the options.
-    !opt.horizontal && this.$handle.css('cursor', 'ns-resize');
-    !opt.vertical && this.$handle.css('cursor', 'ew-resize');
+    this.$cover = $('<div>', { 'class': 'resizable-cover' });
 
     // Update min/max width and height values merging options and CSS properties.
     // (options overwrite CSS)
@@ -66,11 +72,29 @@ init() {
     (this.$el.css('position') === 'static') && this.$el.css('position', 'relative');
 
     this.$handle.on('mousedown', e => {
+
         this.updatePositions(e);
+
+        $W.one('mousemove', e => {
+            // Update cursor.
+            $B.css('cursor', this.cursor);
+
+            // Insert cover element to prevent iframe to capture mousemove events.
+            this.$el.append(this.$cover);
+        });
+
         $W.on('mousemove', this.onMousemove.bind(this));
     });
 
-    $W.on('mouseup', e => $W.off('mousemove.' + namespace));
+    $W.on('mouseup', e => {
+
+        // Update cursor.
+        $B.css('cursor', 'auto');
+
+        this.$cover.remove();
+
+        $W.off('mousemove.' + namespace);
+    });
 }
 
 /* updatePositions ---------------------------------------------------------- */
