@@ -1,4 +1,13 @@
 {
+  "name": "resizable",
+  "description": "JS script to allow resize elements.",
+  "homepage": "http://jodd.net",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jodd/resizable.git"
+  },
+  "main": "src/resizable.js",
+  "author": "Joris Durand",
   "jspm": {
     "dependencies": {
       "jquery": "github:components/jquery@^2.1.4",
