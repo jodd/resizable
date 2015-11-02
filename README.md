@@ -1,10 +1,8 @@
-# Elément redimensionnable
+# Resizable
 
-J'ai écrit ce script pour pouvoir redimensionner les démos embarquées sur mon site depuis Codepen.
-C'était utile notamment pour les démos du menu hamburger et du modèle de navigation par priorité (sinon il aurait fallu redimmensionner la fenêtre pour tester et c'est moins bien).
-J'en ai profité pour intégrer le support des valeurs max et min (via CSS ou en passant les valeurs en paramètres - utile si elles sont calculées dynamiquement).
+Un script qui permet à l'utilisateur de modifier la taille d'un élément.
 
-## [Demo](http://jodd.net)
+## [Demo](http://jodd.net/2015/11/02/resizable.html)
 
 ## Ressources
 
