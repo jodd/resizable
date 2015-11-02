@@ -23,22 +23,15 @@ header
     position relative
     margin 1em 0
 
-
-/* ==========================================================================
-   Resizable
-   ========================================================================== */
-
 /**
  * 1. Ghost element technique to vertically center child element.
  */
-
-.resizable
-    position relative
+div
     width 300px
     height 300px
     border 3px solid text-color
     background-color bg-color
-    letter-spacing -.5em /* 1 */
+    letter-spacing -.5rem /* 1 */
 
     &:after /* 1 */
         content ''
@@ -51,35 +44,10 @@ header
         vertical-align middle
         letter-spacing normal
 
-    span
+    > span
         width 100%
         text-align center
 
-        strong
-            display block
-            font-size 2rem
-
-    button
+    strong
         display block
-        position absolute
-        bottom .5rem
-        right .5rem
-        padding 0
-        background none
-        border-width 1rem
-        border-style solid
-        border-color transparent text-color text-color transparent
-
-        &:before
-            content ''
-            display block
-            position absolute
-            top -1.2rem
-            left -.7rem
-            width .9rem
-            height 1.8rem
-            background-color text-color
-            transform rotate(45deg)
-
-        span
-            visuallyhidden()
+        font-size 2rem

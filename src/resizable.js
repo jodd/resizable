@@ -8,9 +8,7 @@ import $ from 'jquery';
 const defaults = {
     horizontal: true, // allow horizontal resize
     vertical: true, // allow vertical resize
-    handle: {
-        text: 'Redimmensionner'
-    },
+    text: 'Redimensionner',
     minWidth: 0, // default min/max values
     maxWidth: Infinity,
     minHeight: 0,
@@ -43,9 +41,9 @@ constructor(element, options) {
     this.$el = $(this.el);
 
     // Create the element to use as the handle.
-    this.$handle = $('<button>')
-        .append($('<span>').text(opt.handle.text))
-        .appendTo(this.el).css('cursor', 'nwse-resize');
+    this.$handle = $('<button>', { 'class': 'resizable-handle' }).css('cursor', 'nwse-resize')
+        .append($('<span>', { 'class': 'resizable-text' }).text(opt.text))
+        .appendTo(this.el);
 
     // Adjust CSS cursor property according to the options.
     !opt.horizontal && this.$handle.css('cursor', 'ns-resize');
@@ -64,10 +62,11 @@ constructor(element, options) {
 /* init --------------------------------------------------------------------- */
 init() {
 
+    // Make sure the handle is positioned relatively to the resizable element.
+    (this.$el.css('position') === 'static') && this.$el.css('position', 'relative');
+
     this.$handle.on('mousedown', e => {
-
         this.updatePositions(e);
-
         $W.on('mousemove', this.onMousemove.bind(this));
     });
 

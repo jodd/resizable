@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Resizable
+   ========================================================================== */
+resizable-color = #59514f
+
+.resizable-handle
+    display block
+    position absolute
+    bottom .5rem
+    right .5rem
+    padding 0
+    background none
+    border-width 1em
+    border-style solid
+    border-color transparent resizable-color resizable-color transparent
+
+    &:before
+        content ''
+        display block
+        position absolute
+        top -1.2em
+        left -.7em
+        width .9em
+        height 1.8em
+        background-color resizable-color
+        transform rotate(45deg)
+
+.resizable-text
+    visuallyhidden()
