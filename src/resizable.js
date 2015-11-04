@@ -55,13 +55,6 @@ constructor(element, options = {}) {
 
     this.$cover = $('<div>', { 'class': 'resizable-cover' });
 
-    // Update min/max width and height values merging options and CSS properties.
-    // (options overwrite CSS)
-    this.options.minWidth = options.minWidth || parseInt(this.$el.css('min-width')) || opt.minWidth;
-    this.options.maxWidth = options.maxWidth || parseInt(this.$el.css('max-width')) || opt.maxWidth;
-    this.options.minHeight = options.minHeight || parseInt(this.$el.css('min-height')) || opt.minHeight;
-    this.options.maxHeight = options.maxHeight || parseInt(this.$el.css('max-height')) || opt.maxHeight;
-
     this.init();
 }
 
