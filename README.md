@@ -1,9 +1,9 @@
 # Resizable
 
-Un script qui permet à l'utilisateur de modifier la taille d'un élément.
+A script I used to make my embedded Codepen demos resizeable.
 
-## [Demo](http://jodd.net/2015/11/02/resizable.html)
+[Codepen demo](https://codepen.io/jod/pen/RWBrOx)
 
-## Ressources
+## Resources
 
 - [Resizeable Embeds](http://blog.codepen.io/2014/03/11/resizeable-embeds/)
